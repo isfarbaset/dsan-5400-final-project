@@ -1,7 +1,4 @@
-# Changelog
+# CHANGELOG
 
-<!--next-version-placeholder-->
 
-## v0.1.0 (26/11/2024)
-
-- First release of `5400_final_prj`!
+## v0.0.0 (2024-11-26)

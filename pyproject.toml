@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "final_prj_5400"
-version = "0.1.0"
+version = "0.0.0"
 description = "This project contains research and implementation of NLP"
 authors = ["Isfar Baset, Liz Kovalchuk, Ofure Udabor and Xinyue Zhang"]
 license = "MIT"
