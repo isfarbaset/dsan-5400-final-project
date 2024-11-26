@@ -1,7 +1,7 @@
 
 # DSAN 5400 Final Project
 
-This project contains research and implementation of Natural Language Processing (NLP).
+This project contains research and implementation of Natural Language Processing (NLP)
 
 ## Installation
 
