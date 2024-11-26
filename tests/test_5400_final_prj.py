@@ -1,1 +1,1 @@
-from 5400_final_prj import 5400_final_prj
+from final_prj_5400 import final_prj_5400
