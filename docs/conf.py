@@ -7,8 +7,8 @@
 # -- Project information -----------------------------------------------------
 
 project = u"5400_final_prj"
-copyright = u"2024, Isfar Baset, Liz Kovalchuk, Ofure Udabor and Xinyue Zhang"
-author = u"Isfar Baset, Liz Kovalchuk, Ofure Udabor and Xinyue Zhang"
+copyright = u"2024, Isfar Baset, Liz Kovalchuk, and Xinyue Zhang"
+author = u"Isfar Baset, Liz Kovalchuk, and Xinyue Zhang"
 
 # -- General configuration ---------------------------------------------------
 
