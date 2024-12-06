@@ -1,0 +1,44 @@
+# Relationship Extraction for Contextual Insights in News Articles
+Isfar Baset, Liz Kovalchuk, Xinyue Zhang
+
+## NLP Problem: 
+Our project aims to develop an NLP-based relationship extraction system that identifies and categorizes relationships between entities within news articles. By leveraging Named Entity Recognition (NER) and co-occurrence analysis on data sourced from NewsAPI, we seek to detect and suggest relationships such as partnerships, conflicts, or alliances between companies, countries, or key individuals. This system will enable an understanding of contextual relationships in real-time news, with applications beyond the news domain in fields like market analysis, geopolitical studies, and corporate strategy.
+
+Recent work: 
+
+We reviewed three papers to guide our implementation of enhancing a news bot with NLP. 
+The first paper, "Exploring Sentiment Analysis Techniques in Natural Language Processing", provides an overview of different sentiment analysis methods, highlighting their application in extracting subjective information from textual data. This work can detect emotions and attitudes in text, which is important for tailoring news content to user preferences.
+
+The second paper we found is "A Deep Learning Approach to Integrate Human-Level Understanding in a Chatbot", which explores incorporating sentiment analysis into chatbot systems. The research explores deep learning techniques to demonstrate how chatbots can better understand and respond to user emotions. Thus it can increase user engagement and satisfaction.
+Paper 2
+
+The third paper is called "Keywords Extraction and Sentiment Analysis using Automatic Speech Recognition", it investigates the extraction of keywords and sentiment from spoken language. This study demonstrates the potential of combining automatic speech recognition with NLP techniques to analyze and interpret spoken news content, offering a broader scope for real-time news bots.
+Paper 3
+
+## Dataset: 
+Our team will be using the NewsAPI, a REST API that allows searching and retrieving live articles from all over the web. Use of the NewsAPI makes it possible to look at specific questions for a publisher (e.g. top stories from ‘TechCrunch’), about a specific topic (e.g. looking at produce in the United States), whether or not a specific product been mentioned or reviewed by blogs, etc. Articles can be searched with any combination of the following criteria:
+Keyword or phrase. Eg: find all articles containing the word 'Microsoft'.
+Date published. Eg: find all articles published yesterday.
+Source domain name. Eg: find all articles published on thenextweb.com.
+Language. Eg: find all articles written in English.
+
+Results can be sorted by date published, relevancy to search keyword and popularity of source.
+
+## Methods: 
+	Using the data pulled from the NewsAPI source, we will be leveraging the text identification course material to help us perform relationship extraction between entities. Furthering what we overviewed in the course through additional research and reading, we want to identify and analyze relationships between entities that frequently co-occur within the same articles, such as partnerships, conflicts, or alliances. This can be especially useful in analyzing corporate or political news, where relationships (e.g., between companies, countries, or key figures) are important for understanding context. Having code written to be able to suggest said relationships would be extremely useful and applicable to many domains beyond just news. 
+
+Performance Evaluation: 
+
+We will evaluate our system using an array of performance metrics. Of these metrics, four include: an F1 Score for Relationship Detection, Confusion Matrix, an Accuracy Score, a measurement of Precision, and a measurement of Recall. 
+
+The confusion matrix will display the product of our classification task– whether that happens to be binary classification or multi- class classification–  as it compares to the ground truth of the topic our dataset revolves around. The accuracy score will provide us with a general overview of our model’s ability to analyze the scope of the news articles and provide meaningful, and hopefully somewhat accurate, feedback. To gain a more specific understanding of our model’s capabilities, we will plan to also implement precision and recall metrics. For precision, we will receive feedback on our model’s ability to avoid labeling our classes incorrectly. While recall, will let us know the extent of our model’s overall propensity to label into our classes correctly.
+
+
+## Works Cited: 
+Jehangir, B., Radhakrishnan, S., & Agarwal, R. (2023). A survey on Named Entity Recognition — datasets, tools, and methodologies. Natural Language Processing Journal, 3, 100017. https://doi.org/10.1016/j.nlp.2023.100017
+Keraghel, I., Morbieu, S., & Nadif, M. (2024). A survey on recent advances in Named Entity Recognition. arXiv preprint arXiv:2401.10825v1. https://doi.org/10.48550/arXiv.2401.10825
+News API. (n.d.). News API documentation. News API. Retrieved [04 NOV 2024], from https://newsapi.org/docs
+Schafer, U. (2006). OntoNERdIE – Mapping and linking ontologies to named entity recognition and information extraction resources. German Research Center for Artificial Intelligence (DFKI), Language Technology Lab.
+Liu, Y., Zhao, H., & Chen, W. (2023). Exploring sentiment analysis techniques in natural language processing. arXiv preprint arXiv:2305.14842.
+Patel, M., & Singh, R. (2022). A deep learning approach to integrate human-level understanding in a chatbot. arXiv preprint arXiv:2201.02735.
+Kaur, S., & Kumar, A. (2020). Keywords extraction and sentiment analysis using automatic speech recognition. arXiv preprint arXiv:2004.04099.
