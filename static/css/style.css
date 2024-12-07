@@ -1,26 +1,31 @@
+/* General Styling */
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 0;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
 }
 
-textarea {
-    width: 100%;
-    margin-bottom: 10px;
+.card {
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
+.card-body {
+    padding: 20px;
 }
 
-button:hover {
-    background-color: #0056b3;
+h1, h2 {
+    font-weight: 600;
 }
 
-#results {
-    margin-top: 20px;
+#graph-container {
+    height: 400px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Lists */
+.list-group-item {
+    font-size: 0.9rem;
 }
