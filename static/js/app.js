@@ -71,11 +71,22 @@ function renderGraph(entities, relationships) {
 }
 
 function renderERDiagram(erDiagramData) {
-    console.log("ER Diagram Data:", erDiagramData);  // Log base64 image data
     const graphImage = document.getElementById('relationship-graph');
+    if (!erDiagramData) {
+        graphImage.style.display = 'none';
+        return;
+    }
+    
     if (graphImage && graphImage.tagName === 'IMG') {
+        graphImage.style.display = 'block';
         graphImage.src = erDiagramData;
         graphImage.alt = "Entity Relationship Diagram";
+        
+        // Add error handling for image loading
+        graphImage.onerror = function() {
+            console.error("Failed to load ER diagram");
+            graphImage.style.display = 'none';
+        };
     } else {
         console.error("relationship-graph element is not an img tag");
     }
