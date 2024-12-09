@@ -18,7 +18,7 @@ h1, h2 {
 }
 
 #graph-container {
-    height: 400px;
+    height: 600px;
     overflow: hidden;
     display: flex;
     justify-content: center;

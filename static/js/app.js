@@ -17,16 +17,12 @@ document.getElementById("fetchButton").addEventListener("click", function () {
                 const firstResult = data.results[0];
 
                 // Render Entities and Relationships
-                renderEntities(firstResult.entities || []);
-                renderRelationships(firstResult.relationships || []);
+                renderEntities(data.entities || []);
+                renderRelationships(data.relationships || []);
 
                 // Render Graph Visualization (if applicable)
-                renderGraph(firstResult.entities || [], firstResult.relationships || []);
+                renderGraph(data.entities || [], data.relationships || []);
 
-                // // Render ER Diagram
-                // if (data.er_diagram) {
-                //     renderERDiagram(data.er_diagram);
-                // }
             } else {
                 alert("No articles found!");
             }
@@ -71,15 +67,15 @@ function renderGraph(entities, relationships) {
     const graphContainer = document.getElementById("graph-container");
     graphContainer.innerHTML = ""; // Clear previous content
 
-    const width = 600;
-    const height = 400;
+    const width = 1200;
+    const height = 600;
 
     // Prepare data for D3
     const nodes = entities.map(e => ({ id: e.text, group: e.label }));
     const links = relationships.map(r => ({
         source: r.entity1.text,
         target: r.entity2.text,
-        value: Math.floor(Math.random() * 20)
+        value: 1
 
     }));
 
@@ -108,7 +104,7 @@ function renderGraph(entities, relationships) {
         .selectAll("circle")
         .data(nodes)
         .enter().append("circle")
-        .attr("r", 5)
+        .attr("r", 6.5)
         .attr("fill", d => d3.schemeCategory10[d.group.charCodeAt(0) % 10]);
 
     // Add titles to nodes

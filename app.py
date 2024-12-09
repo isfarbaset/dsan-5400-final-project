@@ -41,7 +41,7 @@ def transform_to_graph_data(entities, relationships):
         links.append({
             "source": entity_to_index[source],
             "target": entity_to_index[target],
-            "value": 1  # You can adjust this value based on your needs
+            "value": 1
         })
 
     return {"nodes": nodes, "links": links}
@@ -49,20 +49,23 @@ def transform_to_graph_data(entities, relationships):
 # API route
 @app.route('/api/fetch', methods=['GET'])
 def fetch_articles():
+    queries = request.args.get('query','').split(' ') 
     query = request.args.get('query', 'technology')
     logger.debug(f"Query received: {query}")
     try:
-        articles = newsapi.get_everything(q=query, language='en', sort_by='relevancy')
-        logger.debug(f"API Response received")
-
-        if not articles or 'articles' not in articles:
-            return jsonify({'error': 'No articles found'}), 404
+        all_articles = [] 
+        for query in queries: 
+            api_response = newsapi.get_everything(q=query, language='en', sort_by='relevancy')
+            logger.debug(f"API Response received")
+            if not api_response or 'articles' not in api_response:
+                return jsonify({'error': 'No articles found'}), 404
+            all_articles.extend(api_response.get('articles', []))
 
         results = []
         all_entities = []
         all_relationships = []
 
-        for article in articles.get('articles', []):
+        for article in all_articles:
             title = article.get('title', '')
             description = article.get('description', '')
             text = f"{title}. {description}".strip()
@@ -92,6 +95,8 @@ def fetch_articles():
 
         return jsonify({
             'results': results,
+            'entities': all_entities,
+            'relationships': all_relationships,
             'er_diagram': er_diagram,
             'graph_data': graph_data
         })
