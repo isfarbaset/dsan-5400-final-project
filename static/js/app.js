@@ -83,7 +83,7 @@ function renderGraph(entities, relationships) {
     }));
 
     // Create SVG
-    const svg = d3.select(graphContainer)
+    d3.select("#graph-container").html("")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
