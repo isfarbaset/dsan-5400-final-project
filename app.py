@@ -3,7 +3,7 @@ from newsapi import NewsApiClient
 from src.final_prj_5400.ner import extract_entities
 from src.final_prj_5400.final_prj_5400 import extract_relationships
 import logging
-from er_visualization import generate_er_diagram
+# from er_visualization import generate_er_diagram
 
 app = Flask(__name__, static_folder="static")
 

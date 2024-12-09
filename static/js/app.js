@@ -23,10 +23,10 @@ document.getElementById("fetchButton").addEventListener("click", function () {
                 // Render Graph Visualization (if applicable)
                 renderGraph(firstResult.entities || [], firstResult.relationships || []);
 
-                // Render ER Diagram
-                if (data.er_diagram) {
-                    renderERDiagram(data.er_diagram);
-                }
+                // // Render ER Diagram
+                // if (data.er_diagram) {
+                //     renderERDiagram(data.er_diagram);
+                // }
             } else {
                 alert("No articles found!");
             }
@@ -83,7 +83,7 @@ function renderGraph(entities, relationships) {
     }));
 
     // Create SVG
-    d3.select("#graph-container").html("")
+    const svg = d3.select("#graph-container").html("")
         .append("svg")
         .attr("width", width)
         .attr("height", height);
