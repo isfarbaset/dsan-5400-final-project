@@ -19,6 +19,33 @@ logger = logging.getLogger(__name__)
 def index():
     return render_template('index.html')
 
+# Route for graph
+@app.route('/graph')
+def graph():
+    return render_template('graph.html')
+
+def transform_to_graph_data(entities, relationships):
+    nodes = []
+    links = []
+    entity_to_index = {}
+
+    # Create nodes
+    for index, entity in enumerate(entities):
+        nodes.append({"id": entity['text'], "group": entity['label']})
+        entity_to_index[entity['text']] = index
+
+    # Create links
+    for rel in relationships:
+        source = rel['entity1']['text']
+        target = rel['entity2']['text']
+        links.append({
+            "source": entity_to_index[source],
+            "target": entity_to_index[target],
+            "value": 1  # You can adjust this value based on your needs
+        })
+
+    return {"nodes": nodes, "links": links}
+
 # API route
 @app.route('/api/fetch', methods=['GET'])
 def fetch_articles():
@@ -51,6 +78,9 @@ def fetch_articles():
                     logger.error(f"Error processing article: {str(e)}")
                     continue
 
+        # Transform data to graph format
+        graph_data = transform_to_graph_data(all_entities, all_relationships)
+
         if all_entities and all_relationships:
             try:
                 er_diagram = generate_er_diagram(all_entities, all_relationships)
@@ -62,7 +92,8 @@ def fetch_articles():
 
         return jsonify({
             'results': results,
-            'er_diagram': er_diagram
+            'er_diagram': er_diagram,
+            'graph_data': graph_data
         })
 
     except Exception as e:
