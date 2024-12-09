@@ -50,6 +50,7 @@ function renderEntities(entities) {
 }
 
 function renderRelationships(relationships) {
+    console.log("Relationships Data:", relationships); // Log the relationships data for debugging
     const relationshipsList = document.getElementById("relationships");
     relationshipsList.innerHTML = ""; // Clear previous results
 
@@ -64,6 +65,7 @@ function renderRelationships(relationships) {
         relationshipsList.appendChild(listItem);
     });
 }
+
 
 function renderGraph(entities, relationships) {
     const graphContainer = document.getElementById("graph-container");

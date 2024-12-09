@@ -69,6 +69,35 @@ def fetch_articles():
         logger.error(f"Error in fetch_articles: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+def extract_relationships(entities):
+    # Placeholder: Ensure entities are in the expected format
+    print(f"Entities received for relationship extraction: {entities}")
+
+    relationships = []
+
+    # Iterate over pairs of entities to infer relationships
+    for i, entity1 in enumerate(entities):
+        for j, entity2 in enumerate(entities):
+            if i != j:  # Avoid self-relations
+                # Infer relationships based on entity types
+                if entity1['label'] == 'ORG' and entity2['label'] == 'EVENT':
+                    relationship = "associated-with"
+                elif entity1['label'] == 'ORG' and entity2['label'] == 'ORG':
+                    relationship = "competitor-to"  # Example relationship
+                elif entity1['label'] == 'DATE' and entity2['label'] == 'EVENT':
+                    relationship = "happens-on"
+                else:
+                    relationship = "related-to"
+
+                # Append the relationship
+                relationships.append({
+                    "entity1": entity1,
+                    "entity2": entity2,
+                    "relationship": relationship
+                })
+
+    print(f"Inferred relationships: {relationships}")
+    return relationships
 
 if __name__ == '__main__':
     app.run(debug=True)

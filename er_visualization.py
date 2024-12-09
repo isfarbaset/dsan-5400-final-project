@@ -3,6 +3,8 @@ import matplotlib.pyplot as plt
 import io
 import base64
 import logging
+import matplotlib
+matplotlib.use('Agg')
 
 logger = logging.getLogger(__name__)
 
