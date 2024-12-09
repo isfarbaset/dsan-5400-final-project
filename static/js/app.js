@@ -79,7 +79,8 @@ function renderGraph(entities, relationships) {
     const links = relationships.map(r => ({
         source: r.entity1.text,
         target: r.entity2.text,
-        value: 1
+        value: Math.floor(Math.random() * 20)
+
     }));
 
     // Create SVG
@@ -114,6 +115,12 @@ function renderGraph(entities, relationships) {
     node.append("title")
         .text(d => d.id);
 
+    // Add a drag behavior.
+    node.call(d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended));
+
     // Update positions on each tick of the simulation
     simulation.on("tick", () => {
         link
@@ -126,26 +133,25 @@ function renderGraph(entities, relationships) {
             .attr("cx", d => d.x)
             .attr("cy", d => d.y);
     });
-}
 
-// function renderERDiagram(erDiagramData) {
-//     const graphImage = document.getElementById('relationship-graph');
-//     if (!erDiagramData) {
-//         graphImage.style.display = 'none';
-//         return;
-//     }
-    
-//     if (graphImage && graphImage.tagName === 'IMG') {
-//         graphImage.style.display = 'block';
-//         graphImage.src = erDiagramData;
-//         graphImage.alt = "Entity Relationship Diagram";
-        
-//         // Add error handling for image loading
-//         graphImage.onerror = function() {
-//             console.error("Failed to load ER diagram");
-//             graphImage.style.display = 'none';
-//         };
-//     } else {
-//         console.error("relationship-graph element is not an img tag");
-//     }
-// }
+    // Reheat the simulation when drag starts, and fix the subject position.
+    function dragstarted(event) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+    }
+
+    // Update the subject (dragged node) position during drag.
+    function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+    }
+
+    // Restore the target alpha so the simulation cools after dragging ends.
+    // Unfix the subject position now that it’s no longer being dragged.
+    function dragended(event) {
+        if (!event.active) simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+    }
+}

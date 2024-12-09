@@ -3,7 +3,7 @@ from newsapi import NewsApiClient
 from src.final_prj_5400.ner import extract_entities
 from src.final_prj_5400.final_prj_5400 import extract_relationships
 import logging
-# from er_visualization import generate_er_diagram
+from itertools import combinations
 
 app = Flask(__name__, static_folder="static")
 
@@ -107,25 +107,24 @@ def extract_relationships(entities):
     relationships = []
 
     # Iterate over pairs of entities to infer relationships
-    for i, entity1 in enumerate(entities):
-        for j, entity2 in enumerate(entities):
-            if i != j:  # Avoid self-relations
-                # Infer relationships based on entity types
-                if entity1['label'] == 'ORG' and entity2['label'] == 'EVENT':
-                    relationship = "associated-with"
-                elif entity1['label'] == 'ORG' and entity2['label'] == 'ORG':
-                    relationship = "competitor-to"  # Example relationship
-                elif entity1['label'] == 'DATE' and entity2['label'] == 'EVENT':
-                    relationship = "happens-on"
-                else:
-                    relationship = "related-to"
+    for entity1, entity2 in list(combinations(entities, 2)):
+        # Infer relationships based on entity types
+        types = [entity1['label'], entity2['label']]
+        if 'ORG' in types and 'EVENT' in types: 
+            relationship = "associated-with"
+        elif types.count('ORG') == 2: 
+            relationship = "competitor-to" 
+        elif 'DATE' in types and 'EVENT' in types: 
+            relationship = "happens-on"
+        else:
+            relationship = "related-to"
 
-                # Append the relationship
-                relationships.append({
-                    "entity1": entity1,
-                    "entity2": entity2,
-                    "relationship": relationship
-                })
+        # Append the relationship
+        relationships.append({
+            "entity1": entity1,
+            "entity2": entity2,
+            "relationship": relationship
+        })
 
     print(f"Inferred relationships: {relationships}")
     return relationships
