@@ -3,7 +3,7 @@ from newsapi import NewsApiClient
 from src.final_prj_5400.ner import extract_entities
 from src.final_prj_5400.final_prj_5400 import extract_relationships
 import logging
-from er_visualization import generate_er_diagram
+from itertools import combinations
 
 app = Flask(__name__, static_folder="static")
 
@@ -19,23 +19,53 @@ logger = logging.getLogger(__name__)
 def index():
     return render_template('index.html')
 
+# Route for graph
+@app.route('/graph')
+def graph():
+    return render_template('graph.html')
+
+def transform_to_graph_data(entities, relationships):
+    nodes = []
+    links = []
+    entity_to_index = {}
+
+    # Create nodes
+    for index, entity in enumerate(entities):
+        nodes.append({"id": entity['text'], "group": entity['label']})
+        entity_to_index[entity['text']] = index
+
+    # Create links
+    for rel in relationships:
+        source = rel['entity1']['text']
+        target = rel['entity2']['text']
+        links.append({
+            "source": entity_to_index[source],
+            "target": entity_to_index[target],
+            "value": 1
+        })
+
+    return {"nodes": nodes, "links": links}
+
 # API route
 @app.route('/api/fetch', methods=['GET'])
 def fetch_articles():
+    queries = request.args.get('query','').split(' ') 
     query = request.args.get('query', 'technology')
     logger.debug(f"Query received: {query}")
     try:
-        articles = newsapi.get_everything(q=query, language='en', sort_by='relevancy')
-        logger.debug(f"API Response received")
-
-        if not articles or 'articles' not in articles:
-            return jsonify({'error': 'No articles found'}), 404
+        all_articles = [] 
+        for query in queries: 
+            api_response = newsapi.get_everything(q=query, language='en', sort_by='relevancy')
+            logger.debug(f"API Response received")
+            if not api_response or 'articles' not in api_response:
+                return jsonify({'error': 'No articles found'}), 404
+            all_articles.extend(api_response.get('articles', []))
 
         results = []
         all_entities = []
         all_relationships = []
 
-        for article in articles.get('articles', []):
+        for article in all_articles:
             title = article.get('title', '')
             description = article.get('description', '')
             text = f"{title}. {description}".strip()
@@ -51,6 +81,9 @@ def fetch_articles():
                     logger.error(f"Error processing article: {str(e)}")
                     continue
 
+        # Transform data to graph format
+        graph_data = transform_to_graph_data(all_entities, all_relationships)
+
         if all_entities and all_relationships:
             try:
                 er_diagram = generate_er_diagram(all_entities, all_relationships)
@@ -62,7 +95,10 @@ def fetch_articles():
 
         return jsonify({
             'results': results,
-            'er_diagram': er_diagram
+            'entities': all_entities,
+            'relationships': all_relationships,
+            'er_diagram': er_diagram,
+            'graph_data': graph_data
         })
 
     except Exception as e:
@@ -76,25 +112,24 @@ def extract_relationships(entities):
     relationships = []
 
     # Iterate over pairs of entities to infer relationships
-    for i, entity1 in enumerate(entities):
-        for j, entity2 in enumerate(entities):
-            if i != j:  # Avoid self-relations
-                # Infer relationships based on entity types
-                if entity1['label'] == 'ORG' and entity2['label'] == 'EVENT':
-                    relationship = "associated-with"
-                elif entity1['label'] == 'ORG' and entity2['label'] == 'ORG':
-                    relationship = "competitor-to"  # Example relationship
-                elif entity1['label'] == 'DATE' and entity2['label'] == 'EVENT':
-                    relationship = "happens-on"
-                else:
-                    relationship = "related-to"
+    for entity1, entity2 in list(combinations(entities, 2)):
+        # Infer relationships based on entity types
+        types = [entity1['label'], entity2['label']]
+        if 'ORG' in types and 'EVENT' in types: 
+            relationship = "associated-with"
+        elif types.count('ORG') == 2: 
+            relationship = "competitor-to" 
+        elif 'DATE' in types and 'EVENT' in types: 
+            relationship = "happens-on"
+        else:
+            relationship = "related-to"
 
-                # Append the relationship
-                relationships.append({
-                    "entity1": entity1,
-                    "entity2": entity2,
-                    "relationship": relationship
-                })
+        # Append the relationship
+        relationships.append({
+            "entity1": entity1,
+            "entity2": entity2,
+            "relationship": relationship
+        })
 
     print(f"Inferred relationships: {relationships}")
     return relationships
