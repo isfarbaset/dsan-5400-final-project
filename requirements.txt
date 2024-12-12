@@ -1,6 +1,5 @@
 
 gunicorn
 flask
-spacy>=3.0.0
-en-core-web-sm==3.8.0
+spacy[en_core_web_sm]
 newsapi-python
