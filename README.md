@@ -24,10 +24,36 @@ This web application extracts entities and relationships from NewsAPI articles a
   - NewsAPI for fetching articles based on user queries.
   - NLP libraries for entity and relationship extraction.
 - **Visualization**:
-  - SVG-based visualization for displaying relationships between entities.
+  - D3.js-based visualization for dynamically displaying relationships between entities in an interactive graph.
 - **Deployment**:
   - Hosted on Heroku for easy access and scalability.
 
+---
+
+## Project Structure
+
+---
+Frontend
+  ├── HTML/CSS/Bootstrap
+  ├── D3.js (Graph Visualization)
+  └── User Interaction (Query Input)
+       ↓
+Backend (Flask)
+  ├── /api/fetch
+  ├── /
+  └── /graph
+       ↘
+External API (NewsAPI)
+       ↘
+NLP Processing
+  ├── Entity Extraction (spacy)
+  └── Relationship Extraction (Custom Logic)
+       ↘
+Visualization
+  ├── Graph Data Transformation
+  └── D3.js Graph
+       ↘
+Deployment (Heroku)
 ---
 
 ## Installation and Setup
@@ -165,7 +191,7 @@ Entities and relationships extracted from articles are displayed in a clean form
 
 - Developed using Flask and Bootstrap.
 - Powered by NewsAPI and Python NLP libraries.
-- Visualization implemented using native SVG rendering.
+- Visualization implemented using D3.js with dynamic SVG rendering.
 
 ---
 
