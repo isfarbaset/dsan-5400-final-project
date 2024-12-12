@@ -2,4 +2,4 @@
 gunicorn
 flask
 spacy[en_core_web_sm]
-newsapi
+newsapi-python
