@@ -26,7 +26,7 @@ This web application extracts entities and relationships from NewsAPI articles a
 - **Visualization**:
   - SVG-based visualization for displaying relationships between entities.
 - **Deployment**:
-  - Can be run locally or deployed on any Flask-supported platform.
+  - Hosted on Heroku for easy access and scalability.
 
 ---
 
@@ -64,16 +64,24 @@ Follow these steps to set up and run the web application locally:
 
 ---
 
+## Heroku Deployment
+
+The web application has been deployed on Heroku for easy accessibility. You can access it at the following link:
+
+[Entity Relationship Extraction Web App on Heroku](https://fathomless-reaches-11453-26072a1d8f9e.herokuapp.com/)
+
+---
+
 ## Usage
 
 1. **Enter a Search Query**:
-    - Type a keyword or phrase in the input box (e.g., "Microsoft") and click **Fetch Articles**. The search engine handles multiple entity relationships (e.g. "Microsoft" and "Google"). 
+    - Type a keyword or phrase in the input box (e.g., "Microsoft") and click **Fetch Articles**. The search engine handles multiple entity relationships (e.g., "Microsoft" and "Google").
   
 2. **View Results**:
     - Entities and relationships extracted from the fetched articles will be displayed in the results section.
 
 3. **Visualize Relationships**:
-    - A graphical representation of the relationships between entities is shown in the "Entity Relationship Visualization" section. It is possible to see entitites by mousing over nodes (they will include the label that is matched below). 
+    - A graphical representation of the relationships between entities is shown in the "Entity Relationship Visualization" section. Hovering over nodes displays the associated labels.
 
 4. **Explore Further**:
     - Modify the query and explore the results dynamically.
@@ -86,10 +94,10 @@ Follow these steps to set up and run the web application locally:
   - Extract entities and relationships from news articles for trend analysis or fact-checking.
 
 - **Knowledge Graph Construction**:
-  - Populate knowledge graphs with entity-relationship data from text sources. This can help to visualize relationships between entities and nodes, a graphic representation that can lead to surprising insights when exploring this network. 
+  - Populate knowledge graphs with entity-relationship data from text sources. This can help visualize relationships between entities and nodes, providing surprising insights.
 
 - **Market Research**:
-  - Identify relationships between products, brands, and competitors. Linkages between two companies or brands can be on surprising results. 
+  - Identify relationships between products, brands, and competitors. Linkages between companies or brands can reveal valuable insights.
 
 - **Education and Demonstration**:
   - Serve as a teaching tool for NLP concepts like Named Entity Recognition (NER) and Relationship Extraction.
@@ -105,7 +113,6 @@ Follow these steps to set up and run the web application locally:
 ### Future Enhancements:
 - **Model Improvements**:
   - Integrate advanced NLP models like BERT, GPT, or domain-specific transformers for improved accuracy.
-  - Custom or modified relationship extraction 
 - **Additional Data Sources**:
   - Extend support to other text sources such as uploaded documents or live web scraping.
 - **Graph Interactivity**:
@@ -114,6 +121,29 @@ Follow these steps to set up and run the web application locally:
   - Enable processing of text in multiple languages.
 - **Scalability**:
   - Deploy as a cloud-based app with public API endpoints for broader accessibility.
+
+---
+
+## Documentation
+
+The project documentation, including API references and tutorials, is built using Sphinx. You can view the HTML documentation locally:
+
+1. Navigate to the `docs` directory:
+    ```bash
+    cd docs
+    ```
+
+2. Build the HTML documentation:
+    ```bash
+    poetry run make html
+    ```
+
+3. Open the generated documentation in your browser:
+    ```bash
+    open _build/html/index.html
+    ```
+
+Alternatively, you can directly open the `index.html` file located in the `_build/html` directory of the `docs` folder.
 
 ---
 
