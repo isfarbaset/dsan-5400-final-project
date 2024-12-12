@@ -1,2 +1,2 @@
 release: ./setup.sh
-web: gunicorn app:app
+web: sh setup.sh && gunicorn app:app
