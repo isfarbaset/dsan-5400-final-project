@@ -122,12 +122,12 @@ Follow these steps to set up and run the web application locally:
 ### Main Interface
 The user interface includes sections for entering a query, viewing extracted results, and visualizing relationships.
 
-![Main Interface](<path_to_screenshot_main_interface>)
+![Main Interface](img/home-page.png)
 
 ### Results
 Entities and relationships extracted from articles are displayed in a clean format for easy readability.
 
-![Results](<path_to_screenshot_results>)
+![Results](img/query-example.png)
 
 ---
 
