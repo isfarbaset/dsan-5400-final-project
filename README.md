@@ -67,13 +67,13 @@ Follow these steps to set up and run the web application locally:
 ## Usage
 
 1. **Enter a Search Query**:
-    - Type a keyword or phrase in the input box (e.g., "Microsoft") and click **Fetch Articles**.
+    - Type a keyword or phrase in the input box (e.g., "Microsoft") and click **Fetch Articles**. The search engine handles multiple entity relationships (e.g. "Microsoft" and "Google"). 
   
 2. **View Results**:
     - Entities and relationships extracted from the fetched articles will be displayed in the results section.
 
 3. **Visualize Relationships**:
-    - A graphical representation of the relationships between entities is shown in the "Entity Relationship Visualization" section.
+    - A graphical representation of the relationships between entities is shown in the "Entity Relationship Visualization" section. It is possible to see entitites by mousing over nodes (they will include the label that is matched below). 
 
 4. **Explore Further**:
     - Modify the query and explore the results dynamically.
@@ -86,10 +86,10 @@ Follow these steps to set up and run the web application locally:
   - Extract entities and relationships from news articles for trend analysis or fact-checking.
 
 - **Knowledge Graph Construction**:
-  - Populate knowledge graphs with entity-relationship data from text sources.
+  - Populate knowledge graphs with entity-relationship data from text sources. This can help to visualize relationships between entities and nodes, a graphic representation that can lead to surprising insights when exploring this network. 
 
 - **Market Research**:
-  - Identify relationships between products, brands, and competitors.
+  - Identify relationships between products, brands, and competitors. Linkages between two companies or brands can be on surprising results. 
 
 - **Education and Demonstration**:
   - Serve as a teaching tool for NLP concepts like Named Entity Recognition (NER) and Relationship Extraction.
@@ -105,6 +105,7 @@ Follow these steps to set up and run the web application locally:
 ### Future Enhancements:
 - **Model Improvements**:
   - Integrate advanced NLP models like BERT, GPT, or domain-specific transformers for improved accuracy.
+  - Custom or modified relationship extraction 
 - **Additional Data Sources**:
   - Extend support to other text sources such as uploaded documents or live web scraping.
 - **Graph Interactivity**:
