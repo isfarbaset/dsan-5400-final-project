@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 
+        Specifies the document type as HTML5 and declares the language of the document as English.
+        The <head> section contains metadata and resources for the document.
+    -->
     <meta charset="UTF-8">
+    <!-- 
+        Sets the character encoding for the document to UTF-8 to support a wide range of characters.
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Ensures proper scaling on mobile devices by setting the viewport for responsive design.
+    -->
     <title>Entity Relationship Graph</title>
+    <!-- 
+        Specifies the title of the web page as "Entity Relationship Graph", displayed on the browser tab.
+    -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- 
+        Includes the D3.js library version 7 for data-driven document visualizations.
+        This library is used to render the graph visualization.
+    -->
 </head>
 <body>
+    <!-- 
+        Defines the main content of the HTML document, which will contain the graph visualization.
+    -->
     <div id="graph"></div>
+    <!-- 
+        Placeholder <div> with an ID of "graph" where the graph visualization will be rendered.
+        The D3.js script dynamically adds the graph elements to this container.
+    -->
     <script src="{{ url_for('static', filename='js/graph.js') }}"></script>
+    <!-- 
+        Links to a JavaScript file located in the "static/js" directory on the server.
+        The file 'graph.js' contains the logic for rendering the graph visualization using D3.js.
+        Flask's `url_for` function dynamically generates the URL for the static resource.
+    -->
 </body>
 </html>

@@ -1,47 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- 
+        Specifies the document type as HTML5 and declares the language of the document as English.
+    -->
     <meta charset="UTF-8">
+    <!-- 
+        Sets the character encoding for the document to UTF-8 to support a wide range of characters.
+    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+        Ensures proper scaling on mobile devices by setting the viewport for responsive design.
+    -->
     <title>Entity Relationship Extraction</title>
+    <!-- 
+        Sets the title of the page displayed on the browser tab.
+    -->
     <link rel="stylesheet" href="/static/css/style.css">
+    <!-- 
+        Links to a custom stylesheet for additional styling of the page.
+        The file is expected to be located in the "static/css" directory.
+    -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 
+        Links to the Bootstrap 5 CSS library from a CDN for pre-designed styles and responsiveness.
+    -->
 </head>
 <body class="bg-light">
+    <!-- 
+        Applies a light background color to the body of the page using Bootstrap's `bg-light` class.
+    -->
     <div class="container mt-4">
+        <!-- 
+            Provides a responsive container for the page content with top margin for spacing.
+        -->
         <h1 class="text-center mb-4">Entity Relationship Extraction</h1>
+        <!-- 
+            Main heading for the page, centered with a bottom margin for spacing.
+        -->
 
         <!-- Fetch Articles Section -->
         <div class="card shadow-sm mb-4">
+            <!-- 
+                Card container with shadow styling for visual emphasis, and bottom margin for spacing.
+            -->
             <div class="card-body">
+                <!-- 
+                    Body of the card for content display.
+                -->
                 <h2 class="h5">Fetch Articles from NewsAPI</h2>
+                <!-- 
+                    Subheading for the fetch articles functionality.
+                -->
                 <div class="input-group">
+                    <!-- 
+                        A Bootstrap input group for combining a text input field and a button.
+                    -->
                     <input id="queryInput" type="text" class="form-control" placeholder="Enter search term..." aria-label="Search Query Input">
+                    <!-- 
+                        Input field for entering a search query. The `id` attribute allows JavaScript to access this element.
+                    -->
                     <button id="fetchButton" class="btn btn-primary">Fetch Articles</button>
+                    <!-- 
+                        Button to trigger the fetch operation. The `id` attribute allows JavaScript to attach event listeners.
+                    -->
                 </div>
             </div>
         </div>
 
         <!-- Visualization Section -->
         <div class="card shadow-sm">
+            <!-- 
+                Card container for the visualization section.
+            -->
             <div class="card-body">
+                <!-- 
+                    Body of the card for content display.
+                -->
                 <h2 class="h5">Entity Relationship Visualization</h2>
+                <!-- 
+                    Subheading for the graph visualization section.
+                -->
                 <div id="graph-container" class="border p-3 bg-white"></div>
+                <!-- 
+                    Placeholder `div` for the graph visualization. 
+                    It has a border, padding, and a white background.
+                -->
             </div>
         </div>
 
         <!-- Results Section -->
         <div class="card shadow-sm mb-4">
+            <!-- 
+                Card container with shadow styling for the results section.
+            -->
             <div class="card-body">
+                <!-- 
+                    Body of the card for content display.
+                -->
                 <h2 class="h5">Results</h2>
+                <!-- 
+                    Subheading for the results section.
+                -->
                 <div class="row">
+                    <!-- 
+                        Bootstrap row for dividing the results into two columns.
+                    -->
                     <div class="col-md-6">
+                        <!-- 
+                            First column for displaying entities.
+                        -->
                         <h3 class="h6">Entities</h3>
+                        <!-- 
+                            Subheading for the entities list.
+                        -->
                         <ul id="entities" class="list-group"></ul>
+                        <!-- 
+                            Unordered list for displaying extracted entities.
+                            The `id` attribute allows JavaScript to dynamically populate this list.
+                        -->
                     </div>
                     <div class="col-md-6">
+                        <!-- 
+                            Second column for displaying relationships.
+                        -->
                         <h3 class="h6">Relationships</h3>
+                        <!-- 
+                            Subheading for the relationships list.
+                        -->
                         <ul id="relationships" class="list-group"></ul>
+                        <!-- 
+                            Unordered list for displaying extracted relationships.
+                            The `id` attribute allows JavaScript to dynamically populate this list.
+                        -->
                     </div>
                 </div>
             </div>
@@ -49,7 +140,17 @@
     </div>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- 
+        Includes the D3.js library version 7 for data-driven document visualizations.
+    -->
     <script src="/static/js/app.js"></script>
+    <!-- 
+        Links to a custom JavaScript file for the application logic.
+        The file is expected to be located in the "static/js" directory.
+    -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 
+        Includes the Bootstrap 5 JavaScript bundle for interactive components like modals and dropdowns.
+    -->
 </body>
 </html>

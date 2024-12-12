@@ -1,31 +1,38 @@
 /* General Styling */
+/* Styles applied to the body element for consistent typography and spacing */
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
+    font-family: 'Arial', sans-serif; /* Sets a clean and readable font */
+    line-height: 1.6; /* Increases line height for better readability */
 }
 
+/* Styles for card elements, providing rounded corners and managing content overflow */
 .card {
-    border-radius: 10px;
-    overflow: hidden;
+    border-radius: 10px; /* Rounds the corners of the card */
+    overflow: hidden; /* Ensures child elements don't overflow outside the card */
 }
 
+/* Styling for the card body, ensuring consistent padding */
 .card-body {
-    padding: 20px;
+    padding: 20px; /* Adds inner spacing within the card body */
 }
 
+/* Heading styling for consistent weight and hierarchy */
 h1, h2 {
-    font-weight: 600;
+    font-weight: 600; /* Makes headings bold and prominent */
 }
 
+/* Graph container styles to center content and maintain a fixed height */
+/* Used for positioning graphical elements within a designated area */
 #graph-container {
-    height: 600px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 600px; /* Sets a fixed height for the container */
+    overflow: hidden; /* Hides overflow to maintain a clean layout */
+    display: flex; /* Enables flexbox layout for child elements */
+    justify-content: center; /* Horizontally centers the content */
+    align-items: center; /* Vertically centers the content */
 }
 
 /* Lists */
+/* Styling for list group items to ensure consistent font size */
 .list-group-item {
-    font-size: 0.9rem;
+    font-size: 0.9rem; /* Sets a slightly smaller font size for list items */
 }

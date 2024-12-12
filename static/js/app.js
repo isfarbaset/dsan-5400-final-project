@@ -1,3 +1,8 @@
+/**
+ * Adds an event listener to the "fetchButton" button. On click, it retrieves a query from the input field,
+ * sends it to the server via an API call, and processes the response to render entities, relationships,
+ * and a graph visualization.
+ */
 document.getElementById("fetchButton").addEventListener("click", function () {
     const query = document.getElementById("queryInput").value;
     console.log("Fetch button clicked!"); // Log when the button is clicked
@@ -22,7 +27,6 @@ document.getElementById("fetchButton").addEventListener("click", function () {
 
                 // Render Graph Visualization (if applicable)
                 renderGraph(data.entities || [], data.relationships || []);
-
             } else {
                 alert("No articles found!");
             }
@@ -33,6 +37,10 @@ document.getElementById("fetchButton").addEventListener("click", function () {
         });
 });
 
+/**
+ * Renders a list of entities in the "entities" section of the UI.
+ * @param {Array} entities - An array of entity objects with `text` and `label` properties.
+ */
 function renderEntities(entities) {
     const entitiesList = document.getElementById("entities");
     entitiesList.innerHTML = ""; // Clear previous results
@@ -45,6 +53,10 @@ function renderEntities(entities) {
     });
 }
 
+/**
+ * Renders a list of relationships in the "relationships" section of the UI.
+ * @param {Array} relationships - An array of relationship objects with `entity1`, `entity2`, and `relationship` properties.
+ */
 function renderRelationships(relationships) {
     console.log("Relationships Data:", relationships); // Log the relationships data for debugging
     const relationshipsList = document.getElementById("relationships");
@@ -62,7 +74,11 @@ function renderRelationships(relationships) {
     });
 }
 
-
+/**
+ * Renders a graph visualization of entities and relationships using D3.js.
+ * @param {Array} entities - An array of entity objects with `text` and `label` properties.
+ * @param {Array} relationships - An array of relationship objects with `entity1`, `entity2`, and `relationship` properties.
+ */
 function renderGraph(entities, relationships) {
     const graphContainer = document.getElementById("graph-container");
     graphContainer.innerHTML = ""; // Clear previous content
@@ -76,7 +92,6 @@ function renderGraph(entities, relationships) {
         source: r.entity1.text,
         target: r.entity2.text,
         value: 1
-
     }));
 
     // Create SVG
@@ -130,21 +145,29 @@ function renderGraph(entities, relationships) {
             .attr("cy", d => d.y);
     });
 
-    // Reheat the simulation when drag starts, and fix the subject position.
+    /**
+     * Handles the drag start event.
+     * @param {Object} event - The drag event object.
+     */
     function dragstarted(event) {
         if (!event.active) simulation.alphaTarget(0.3).restart();
         event.subject.fx = event.subject.x;
         event.subject.fy = event.subject.y;
     }
 
-    // Update the subject (dragged node) position during drag.
+    /**
+     * Handles the dragging event.
+     * @param {Object} event - The drag event object.
+     */
     function dragged(event) {
         event.subject.fx = event.x;
         event.subject.fy = event.y;
     }
 
-    // Restore the target alpha so the simulation cools after dragging ends.
-    // Unfix the subject position now that it’s no longer being dragged.
+    /**
+     * Handles the drag end event.
+     * @param {Object} event - The drag event object.
+     */
     function dragended(event) {
         if (!event.active) simulation.alphaTarget(0);
         event.subject.fx = null;
