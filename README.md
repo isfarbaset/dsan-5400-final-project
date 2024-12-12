@@ -32,7 +32,7 @@ This web application extracts entities and relationships from NewsAPI articles a
 
 ## Project Structure
 
----
+```
 Frontend
   ├── HTML/CSS/Bootstrap
   ├── D3.js (Graph Visualization)
@@ -54,7 +54,7 @@ Visualization
   └── D3.js Graph
        ↘
 Deployment (Heroku)
----
+```
 
 ## Installation and Setup
 
