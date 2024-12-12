@@ -23,8 +23,11 @@ jobs:
       - name: Install package
         run: poetry install
 
+      - name: Install Spacy Language Model
+        run: poetry run python -m spacy download en_core_web_sm
+
       - name: Test with pytest
-        run: poetry run pytest tests/ --cov=5400_final_prj --cov-report=xml
+        run: poetry run pytest tests/ --cov=src.final_prj_5400 --cov-report=xml
 
       - name: Use Codecov to track coverage
         uses: codecov/codecov-action@v3

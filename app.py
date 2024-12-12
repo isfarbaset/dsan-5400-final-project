@@ -11,20 +11,30 @@ NEWS_API_KEY = '481b1e4a75874d2f9a23e3329031364c'
 newsapi = NewsApiClient(api_key=NEWS_API_KEY)
 
 # Set up logging
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("logging.txt"),
+        logging.StreamHandler()
+    ]
+)
 logger = logging.getLogger(__name__)
 
 # Route for root URL
 @app.route('/')
 def index():
+    logger.info("Index route accessed")
     return render_template('index.html')
 
 # Route for graph
 @app.route('/graph')
 def graph():
+    logger.info("Graph route accessed")
     return render_template('graph.html')
 
 def transform_to_graph_data(entities, relationships):
+    logger.debug("Transforming entities and relationships into graph data")
     nodes = []
     links = []
     entity_to_index = {}
@@ -44,20 +54,24 @@ def transform_to_graph_data(entities, relationships):
             "value": 1
         })
 
+    logger.debug("Graph data transformation completed")
     return {"nodes": nodes, "links": links}
 
 # API route
 @app.route('/api/fetch', methods=['GET'])
 def fetch_articles():
-    queries = request.args.get('query','').split(' ') 
+    queries = request.args.get('query', '').split(' ') 
     query = request.args.get('query', 'technology')
-    logger.debug(f"Query received: {query}")
+    logger.info(f"Query received: {query}")
+
     try:
         all_articles = [] 
         for query in queries: 
+            logger.debug(f"Fetching articles for query: {query}")
             api_response = newsapi.get_everything(q=query, language='en', sort_by='relevancy')
-            logger.debug(f"API Response received")
+            logger.debug("API response received")
             if not api_response or 'articles' not in api_response:
+                logger.warning(f"No articles found for query: {query}")
                 return jsonify({'error': 'No articles found'}), 404
             all_articles.extend(api_response.get('articles', []))
 
@@ -70,6 +84,7 @@ def fetch_articles():
             description = article.get('description', '')
             text = f"{title}. {description}".strip()
             if text:
+                logger.debug(f"Processing article: {title}")
                 try:
                     entities = extract_entities(text)
                     relationships = extract_relationships(entities)
@@ -86,6 +101,7 @@ def fetch_articles():
 
         if all_entities and all_relationships:
             try:
+                logger.info("Generating ER diagram")
                 er_diagram = generate_er_diagram(all_entities, all_relationships)
             except Exception as e:
                 logger.error(f"Error generating diagram: {str(e)}")
@@ -106,14 +122,11 @@ def fetch_articles():
         return jsonify({'error': str(e)}), 500
 
 def extract_relationships(entities):
-    # Placeholder: Ensure entities are in the expected format
-    print(f"Entities received for relationship extraction: {entities}")
-
+    logger.debug(f"Extracting relationships from entities: {entities}")
     relationships = []
 
     # Iterate over pairs of entities to infer relationships
     for entity1, entity2 in list(combinations(entities, 2)):
-        # Infer relationships based on entity types
         types = [entity1['label'], entity2['label']]
         if 'ORG' in types and 'EVENT' in types: 
             relationship = "associated-with"
@@ -124,15 +137,15 @@ def extract_relationships(entities):
         else:
             relationship = "related-to"
 
-        # Append the relationship
         relationships.append({
             "entity1": entity1,
             "entity2": entity2,
             "relationship": relationship
         })
 
-    print(f"Inferred relationships: {relationships}")
+    logger.debug(f"Inferred relationships: {relationships}")
     return relationships
 
 if __name__ == '__main__':
+    logger.info("Starting Flask application")
     app.run(debug=True)
