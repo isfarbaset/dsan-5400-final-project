@@ -1,2 +1,4 @@
 gunicorn
-fl
+flask
+spacy>=3.0.0
+newsapi-python
