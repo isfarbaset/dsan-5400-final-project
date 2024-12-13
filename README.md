@@ -55,6 +55,8 @@ Visualization
        ↘
 Deployment (Heroku)
 ```
+![Flowchart of the application architecture](img/project_structure.png)
+
 
 ## Installation and Setup
 
