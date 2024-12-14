@@ -191,11 +191,7 @@ Entities and relationships extracted from articles are displayed in a clean form
 
 ## To Test 
 
-From the root directory, run: 
-
-* pytest tests/test_1.py
-* pytest tests/test_app.py 
-
+From the root directory, run: pytest -v 
 
 ## Credits
 
