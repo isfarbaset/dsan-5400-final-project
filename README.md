@@ -1,5 +1,7 @@
 # Entity Relationship Extraction Web App
 
+#### Project by: Isfar Baset, Liz Kovalchuk and Xinyue Zhang
+
 This web application extracts entities and relationships from NewsAPI articles and visualizes them in an intuitive interface. It demonstrates the application of Natural Language Processing (NLP) to real-world text data and offers interactive features for exploring relationships between entities.
 
 ---
