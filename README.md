@@ -92,6 +92,12 @@ Follow these steps to set up and run the web application locally:
 5. **Access the Web App**:
     Open your browser and navigate to `http://127.0.0.1:5000`.
 
+## Running the tests:
+
+Please use the following command:
+```bash
+pytest -v
+```
 ---
 
 ## Heroku Deployment
